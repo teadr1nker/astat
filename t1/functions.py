@@ -14,7 +14,7 @@ def parsesheet(file, sheet):
             d = float(d)
             data.append(d)
         except:
-            d = 0
+            pass
 
     data = np.array(data)
     data = data[~pd.isnull(data)]
@@ -33,12 +33,9 @@ def func(data, name):
     plt.hist(data)
     plt.savefig(f'hist_{name}.png')
     plt.clf()
-    #data = data1[:len(data) - (len(data)%10)]
-    #mn = []
-    #for sd in np.split(data, 10):
-    #    mn.append(np.mean(sd))
-    #plt.plot(mn)
-    #plt.savefig(f'dist_{name}.png')
-    #plt.clf()
-    print(f'ineterval 95%: {stats.t.interval(0.95, len(data)-1, loc=np.mean(data),scale=stats.sem(data))}')
-    print(f'ineterval 99%: {stats.t.interval(0.99, len(data)-1, loc=np.mean(data),scale=stats.sem(data))}')
+    print('interval 95%: {}'.format(
+    stats.t.interval(0.95, len(data)-1, loc=np.mean(data),scale=stats.sem(data))
+    ))
+    print('interval 99%: {}'.format(
+    stats.t.interval(0.99, len(data)-1, loc=np.mean(data),scale=stats.sem(data))
+    ))

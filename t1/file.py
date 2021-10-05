@@ -7,6 +7,6 @@ file = pd.ExcelFile(path)
 for sheet in file.sheet_names:
     data = parsesheet(file, sheet)
     #print(sheet, data, type(data[0]))
-    print(f'nsheet" {sheet}')
+    print(f'sheet" {sheet}')
     func(data, sheet)
     print()
