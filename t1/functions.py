@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import os
 
 def parsesheet(file, sheet):
-    #print(sheet)
     data1 = file.parse(sheet)
     data1 = list(data1.to_numpy().T[0])
     data = []
@@ -34,10 +33,9 @@ def func(data, name):
     nbins = 10
     dataMid = (max(data) - min(data))/1
     c, b = np.histogram(data, bins=nbins)
-    #print(c, b)
     plt.plot(b[:-1], c)
-    #plt.savefig(f'pol_{name}.png')
     plt.hist(data, bins=nbins)
+    plt.title(name)
     plt.xlabel('sample')
     plt.ylabel('frequency')
     plt.savefig(f'hist_{name}.png')
@@ -58,6 +56,7 @@ def func(data, name):
             dict2[i] += dict[j]
 
     plt.plot(sorted(dict2.keys()), sorted(dict2.values()))
+    plt.title(name)
     plt.xlabel('sample')
     plt.ylabel('prob')
     plt.savefig(f'probFunc_{name}.png')
