@@ -20,3 +20,6 @@ class tex:
 
     def printline(line):
         print(line.replace('_', '\_') + '\\\\')
+
+    def addimage(name):
+        print('\\includegraphics[scale=0.8]{'+name+'}\\\\')
