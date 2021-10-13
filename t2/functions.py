@@ -38,7 +38,7 @@ def testdistr(data, name ,a=0.1):
 
     res = stats.kstest(data, 'uniform')
     if res[1] > a:
-        comparedistr(data, name+'_ks', 'uniform')    
+        comparedistr(data, name+'_ks', 'uniform')
 
     res = stats.chisquare(data)
     tex.printline(f'chisquare norm: {res[1]}')
@@ -133,7 +133,6 @@ def comparenorm(data, name):
     plt.title(name)
     plt.xlabel('sample')
     plt.ylabel('freq')
-    #plt.plot(stats.norm.pdf(np.linspace(min(data), max(data), len(data))))
     plt.savefig(filename)
     plt.clf()
     tex.addimage(filename)
@@ -143,7 +142,6 @@ def compareexpon(data, name):
     nbins = 10
     c, b = np.histogram(data, bins=nbins)
     plt.plot(b[:-1], c)
-    #plt.plot(stats.norm.pdf(np.linspace(min(data), max(data), len(data))))
     plt.title(name)
     plt.xlabel('sample')
     plt.ylabel('freq')
