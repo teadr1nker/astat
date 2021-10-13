@@ -36,6 +36,10 @@ def testdistr(data, name ,a=0.1):
     if res[1] > a:
         comparedistr(data, name+'_ks', 'norm')
 
+    res = stats.kstest(data, 'uniform')
+    if res[1] > a:
+        comparedistr(data, name+'_ks', 'uniform')    
+
     res = stats.chisquare(data)
     tex.printline(f'chisquare norm: {res[1]}')
     if res[1] > a:
@@ -153,4 +157,6 @@ def comparedistr(data, name, type='norm'):
     if type == 'norm':
         comparenorm(data, name)
     if type == 'expon':
-        comparenorm(data, expon)
+        comparenorm(data, name)
+    if type == 'uniform':
+        comparenorm(data, name)
