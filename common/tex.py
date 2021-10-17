@@ -23,3 +23,6 @@ class tex:
 
     def addimage(name):
         print('\\includegraphics[scale=0.8]{'+name+'}\\\\')
+
+    def section(str, n = 0):
+        print('\\'+'sub'*n+'section{'+str+'}')
