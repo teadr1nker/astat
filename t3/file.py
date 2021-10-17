@@ -38,6 +38,7 @@ tex.section('Статистическое моделирование')
 N = 100
 a = 0.0
 b = 1.0
+tex.section(f'Равномерное распределение [{a}:{b}]',1)
 tex.printline(F'N={N} a={a} b={b}')
 data1 = np.random.uniform(a, b, N)
 plt.hist(data1, 10)
@@ -52,7 +53,7 @@ tex.addimage('uniform1.png')
 N = 100
 a = 2.0
 b = 7.0
-
+tex.section(f'Равномерное распределение [{a}:{b}]',1)
 data2 = np.random.uniform(a, b, N)
 #print(data1)
 tex.printline(F'N={N} a={a} b={b}')
@@ -68,6 +69,7 @@ tex.addimage('uniform2.png')
 N = 100
 mean = 6
 var = 200
+tex.section('Нормальное распределение', 1)
 tex.printline(F'N={N}')
 data3 = np.random.normal(mean, var, N)
 #norm = stats.norm.rvs(mean, var, N)
@@ -84,6 +86,7 @@ tex.addimage('norm.png')
 #4
 N = 100
 lmbd = 2
+tex.section('Экспоненциальное', 1)
 tex.printline(F'N={N}')
 data4 = np.random.exponential(1/lmbd, N)
 plt.hist(data4, 20)
@@ -98,6 +101,7 @@ tex.addimage('expon.png')
 N = 200
 a = 10
 b = 30
+tex.section('Вычисление определенного интеграла методом Монте-Карло', 1)
 f = lambda x: -((x - 15) ** 2 - 100)
 tex.printline(inspect.getsource(f))
 plt.plot(np.linspace(a,b,N), [f(x) for x in np.linspace(a,b,N)])
@@ -111,8 +115,9 @@ tex.printline(f'Monte Carlo N = {N*10}: {montecarloint(f, N*10, a, b)}')
 tex.printline(f'scipy.integrate.quad(): {sp.integrate.quad(f, a, b)[0]}')
 
 #6
+tex.section('Определение экстремума функции методом Монте-Карло', 1)
 y, x = montecarlomax(f, N, a, b)
-tex.printline(f'Monte carlo N={N}: max={y} at x = {x}')
+tex.printline(f'Monte Carlo N={N}: max={y} at x = {x}')
 plt.plot([x], [y], marker='o')
 plt.savefig('max.png')
 tex.addimage('max.png')
