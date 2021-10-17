@@ -76,7 +76,7 @@ data3 = np.random.normal(mean, var, N)
 #dens = density(norm, 20)
 plt.hist(data3, 20)
 plt.title(f'norm mean={mean} var={var}')
-#plt.plot(dens[0], dens[1])
+#plt.plot(dens[0], dens[1])c
 plt.xlabel('sample')
 plt.ylabel('freq')
 plt.savefig('norm.png')
@@ -102,6 +102,7 @@ N = 200
 a = 10
 b = 30
 tex.section('Вычисление определенного интеграла методом Монте-Карло', 1)
+tex.printline(f'Ограничения [{a}:{b}]')
 f = lambda x: -((x - 15) ** 2 - 100)
 tex.printline(inspect.getsource(f))
 plt.plot(np.linspace(a,b,N), [f(x) for x in np.linspace(a,b,N)])
