@@ -40,10 +40,14 @@ x = parsesheet(file, sheets[2])
 y = parsesheet(file, Y)
 
 lreg = logreg(x, y)
-g = sorted(np.log(x) * lreg[0] + lreg[1])
-#plt.plot(sorted(x), g / max(g))
-ereg = expreg(x, y)
-#plt.plot(sorted(x), sorted(np.exp(x * ereg[1]) * ereg[0]))
+#print(lreg)
+g = np.log(x) * lreg[0] + lreg[1]
+g = sorted(g) / np.max(g)
+plt.plot(sorted(x), g - min(g))
+#ereg = expreg(x, y)
+#g = np.exp(x) * ereg[0] + ereg[1]
+#g = sorted(g) / np.max(g)
+#plt.plot(sorted(x), g - min(g))
 
-#plt.legend(['log', 'exp'])
-#plt.show()
+plt.legend(['log', 'exp', 'pow'])
+plt.show()

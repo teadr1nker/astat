@@ -62,8 +62,8 @@ def linreg(datax, datay):
 
 def logreg(x, y):
     m = min([len(x), len(y)])
-    return np.polyfit(np.log(x[:m]), y[:m], 1)
+    return np.polyfit(np.log(x[:m]) / max(x), y[:m] / max(y), 1)
 
 def expreg(x, y):
     m = min([len(x), len(y)])
-    return np.polyfit(np.log(y[:m]), x[:m], 1)    
+    return np.polyfit(np.log(y[:m]) / max(y), x[:m] / max(x), 1)
