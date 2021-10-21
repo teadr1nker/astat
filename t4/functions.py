@@ -31,7 +31,7 @@ def cor(name1, name2, datax, datay, a=0.05):
         plt.title(f'{name1}/{name2}')
         plt.savefig(filename)
         plt.clf()
-    return round(st, 4)
+    return (round(st, 4))
 
 def compare(datax, datay, a=0.1):
     if len(datax) != len(datay):
@@ -59,3 +59,11 @@ def checkcor(a, crit):
 def linreg(datax, datay):
     m = min([len(datax), len(datay)])
     return stats.linregress(datax[:m], datay[:m])
+
+def logreg(x, y):
+    m = min([len(x), len(y)])
+    return np.polyfit(np.log(x[:m]), y[:m], 1)
+
+def expreg(x, y):
+    m = min([len(x), len(y)])
+    return np.polyfit(np.log(y[:m]), x[:m], 1)    
