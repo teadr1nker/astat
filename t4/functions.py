@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from scipy import stats
+from scipy import stats, optimize
 import matplotlib.pyplot as plt
 import os, sys#, inspect
 sys.path.append('../common/')
@@ -28,8 +28,9 @@ def cor(name1, name2, datax, datay, a=0.05):
     if pv > a:
         plt.scatter(datax[:m] / max(datax), datay[:m] / max(datay))
         filename = f'scatter{name1}_{name2}.png'
-        plt.title(f'{name1}/{name2}')
+        plt.title(f'scatter: {name1}/{name2}')
         plt.savefig(filename)
+        tex.addimage(filename)
         plt.clf()
     return (round(st, 4))
 
@@ -62,8 +63,16 @@ def linreg(datax, datay):
 
 def logreg(x, y):
     m = min([len(x), len(y)])
-    return np.polyfit(np.log(x[:m]) / max(x), y[:m] / max(y), 1)
+    x = x[:m]; y = y[:m]
+    return np.polyfit(np.log(x), y, 1)
 
 def expreg(x, y):
     m = min([len(x), len(y)])
-    return np.polyfit(np.log(y[:m]) / max(y), x[:m] / max(x), 1)
+    x = x[:m]; y = y[:m]
+    return np.polyfit(x, np.log(y), 1)
+
+def powreg(x, y):
+    m = min([len(x), len(y)])
+    x = x[:m]; y = y[:m]
+    popt, pcov = optimize.curve_fit(lambda fx,a,b: a*fx**-b,  y,  x)
+    return popt
