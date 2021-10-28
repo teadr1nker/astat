@@ -37,7 +37,11 @@ for sheet in sheets:
     #print(linreg(parsesheet(file, Y), parsesheet(file, sheet)))
     line = linreg(parsesheet(file, Y), parsesheet(file, sheet))
     x = parsesheet(file, Y)
-    plt.plot(x, x * line.slope + line.intercept)
+    y = x * line.slope + line.intercept
+    plt.plot(x, y / np.max(y))
+    tex.printline(f'{Y}/{sheet}')
+    tex.printline(f'r_value: {line.rvalue} pvalue: {line.pvalue}')
+    #print(line)
 
 plt.legend(sheets)
 plt.title(f'linear regression: {Y}/rest')
@@ -48,24 +52,26 @@ plt.clf()
 tex.section('Логарифмическая, степенная, показательная регрессия' ,1)
 x = parsesheet(file, sheets[2])
 y = parsesheet(file, Y)
-
 m = min([len(x), len(y)])
 plt.plot(sorted(x[:m]), sorted(y[:m] / np.max(y)))
 
 lreg = logreg(x, y)
 g = np.log(x) * lreg[0] + lreg[1]
-g = sorted(g) / np.max(g)
-plt.plot(sorted(x), g)
+#g =
+plt.plot(sorted(x), sorted(g) / np.max(g))
+tex.printline(f'Rvalue logreg: {np.mean((sorted(y[:m] / np.max(y)) - np.array(sorted(g[:m] / np.max(g))))**2)}')
 
 ereg = expreg(x, y)
 g = np.exp(ereg[1] + ereg[0] * x)
-g = sorted(g) / np.max(g)
-plt.plot(sorted(x), g)
+#g = sorted(g) / np.max(g)
+plt.plot(sorted(x), sorted(g) / np.max(g))
+tex.printline(f'Rvalue expreg: {np.mean((sorted(y[:m] / np.max(y)) - np.array(sorted(g[:m] / np.max(g))))**2)}')
 
 preg = powreg(x, y)
 g = preg[0]*x**-preg[1]
-g = sorted(g) / np.max(g)
-plt.plot(sorted(x), g)
+#g = sorted(g) / np.max(g)
+plt.plot(sorted(x), sorted(g) / np.max(g))
+tex.printline(f'Rvalue powreg: {np.mean((sorted(y[:m] / np.max(y)) - np.array(sorted(g[:m] / np.max(g))))**2)}')
 
 plt.legend(['orig', 'log', 'exp', 'pow'])
 plt.title(f'regression: {sheets[2]}/{Y}')
