@@ -7,3 +7,4 @@ X = np.loadtxt('First.txt', delimiter=' ')[:,V]
 Y = np.loadtxt('Second.txt', delimiter=' ')[:,V]
 
 dependency(X, Y)
+cor('first', 'second', X, Y)
