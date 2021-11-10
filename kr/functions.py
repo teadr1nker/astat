@@ -24,6 +24,7 @@ def dependency(datax, datay, a=0.1):
     compare2(datax, datay)
 
 def checkdep(a, crit):
+    tex.printline(f'pvalue={crit}')
     if a > crit:
         tex.printline(f'Independent')
     else:
@@ -38,21 +39,22 @@ def compare2(datax, datay, ns=True):
     filename = f'comparison.png'
     plt.legend(['First', 'Second'])
     plt.title('comparison')
-    plt.xlabel('prob')
-    plt.ylabel('sample')
+    plt.xlabel('sample')
+    plt.ylabel('freq')
     plt.savefig(filename)
     plt.clf()
     tex.addimage(filename)
 
 def cor(name1, name2, datax, datay, a=0.05):
     #print(datax)
+    tex.printline(f'a={a}')
     m = min([len(datax), len(datay)])
     st, pv = stats.pearsonr(datax[:m], datay[:m])
     checkdep(a, pv)
-    print(f'Spearman: {st}')
+    tex.printline(f'Spearman: {st}')
     st, pv = stats.kendalltau(datax[:m], datay[:m])
     checkdep(a, pv)
-    print(f'Kendall: {st}')
+    tex.printline(f'Kendall: {st}')
     st, pv = stats.spearmanr(datax[:m], datay[:m])
     checkdep(a, pv)
-    print(f'Spearman: {st}')
+    tex.printline(f'Spearman: {st}')
