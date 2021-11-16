@@ -34,3 +34,8 @@ class tex:
         np.savetxt(filename, table, delimiter=",", fmt=fmt)
         table = '\csvautotabular{'+filename+'}\\\\'
         print(table)
+
+    def plaintext(obj):
+        print('\\begin{verbatim}' +
+              f'{obj}\n' +
+              '\\end{verbatim}')
