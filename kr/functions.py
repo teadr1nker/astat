@@ -10,7 +10,7 @@ def dependency(datax, datay, a=0.1):
         x = min([len(datax), len(datay)])
         datax = datax[:x]
         datay = datay[:x]
-    tex.printline(f'a={a}')
+    tex.printline(f'Значимость a={a}')
     ks = stats.ks_2samp(datax, datay)
     tex.printline(f'Kolmogorov-Smirnov: {stats.ks_2samp(datax, datay)}')
     checkdep(a, ks[1])
@@ -24,7 +24,7 @@ def dependency(datax, datay, a=0.1):
     compare2(datax, datay)
 
 def checkdep(a, crit):
-    tex.printline(f'pvalue={crit}')
+    #tex.printline(f'pvalue={crit}')
     if a > crit:
         tex.printline(f'Independent')
     else:
@@ -45,16 +45,16 @@ def compare2(datax, datay, ns=True):
     plt.clf()
     tex.addimage(filename)
 
-def cor(name1, name2, datax, datay, a=0.05):
+def cor(name1, name2, datax, datay, a=0.1):
     #print(datax)
-    tex.printline(f'a={a}')
+    tex.printline(f'Значимость a={a}')
     m = min([len(datax), len(datay)])
     st, pv = stats.pearsonr(datax[:m], datay[:m])
+    tex.printline(f'Pearson: cor={st}, pv={pv}')
     checkdep(a, pv)
-    tex.printline(f'Spearman: {st}')
     st, pv = stats.kendalltau(datax[:m], datay[:m])
+    tex.printline(f'Kendall: cor={st}, pv={pv}')
     checkdep(a, pv)
-    tex.printline(f'Kendall: {st}')
     st, pv = stats.spearmanr(datax[:m], datay[:m])
+    tex.printline(f'Spearman: cor={st}, pv={pv}')
     checkdep(a, pv)
-    tex.printline(f'Spearman: {st}')
