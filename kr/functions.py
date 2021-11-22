@@ -58,3 +58,56 @@ def cor(name1, name2, datax, datay, a=0.1):
     st, pv = stats.spearmanr(datax[:m], datay[:m])
     tex.printline(f'Spearman: cor={st}, pv={pv}')
     checkdep(a, pv)
+
+################################################################################
+
+def linreg(X, Y, a=0.1):
+    tex.printline('Y = X * A + B')
+    A, B, rv, pv, _ = stats.linregress(X, Y)
+    tex.printline(f'A={A}, B={B}')
+    plt.scatter(X, Y)
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.plot(X, X * A + B, color='orange')
+    plt.legend(['regression line', 'scatter plot'])
+    plt.savefig('scatter.png')
+    tex.addimage('scatter.png')
+    plt.clf()
+    tex.printline(f'Коэффициент детерминации Rvalue={rv}')
+    tex.printline(f'Pvalue={pv}')
+    tex.printline(f'Значимость а={a}')
+    if a > pv:
+        tex.printline('Не значима, pv < a')
+    else:
+        tex.printline('Значима, pv > a')
+    plt.hist(Y - X * A + B)
+    plt.title('Гистограмма остатков')
+    plt.xlabel('sample')
+    plt.ylabel('freq')
+    plt.savefig('hist.png')
+    tex.addimage('hist.png')
+    plt.clf()
+    plt.plot(sorted(Y), sorted(X * A + B))
+    plt.xlabel('Y')
+    plt.ylabel('f(X)')
+    plt.title('Зависимость')
+    plt.savefig('dependency2.png')
+    tex.addimage('dependency2.png')
+    plt.clf()
+
+def modelrand(values, probs, n=10):
+    if len(values) != len(probs):
+        return None
+    res = []
+    #print(values, probs)
+    for i in range(n):
+        rnd = np.random.uniform()
+        prob = 0.0
+        val = values[-1]
+        for j in range(len(probs) - 1):
+            prob += probs[j]
+            if prob > rnd:
+                val = (values[j])
+                break
+        res.append(val)
+    return np.array(res)
