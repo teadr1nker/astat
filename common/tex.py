@@ -36,6 +36,6 @@ class tex:
         print(table)
 
     def plaintext(obj):
-        print('\\begin{verbatim}' +
+        print('\\begin{verbatim}\n' +
               f'{obj}\n' +
               '\\end{verbatim}')
