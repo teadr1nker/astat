@@ -111,3 +111,8 @@ def modelrand(values, probs, n=10):
                 break
         res.append(val)
     return np.array(res)
+
+def findprob(values, probs, value):
+    for i, v in enumerate(values):
+        if v == value:
+            return probs[i]
