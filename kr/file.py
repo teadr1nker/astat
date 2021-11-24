@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 tex.printhead()
 tex.section('Контрольная работа Миролюбов АК 22404')
 
-V = 19#18
+V = 18
 X = np.loadtxt('First.txt', delimiter=' ')[:,V]
 Y = np.loadtxt('Second.txt', delimiter=' ')[:,V]
 
