@@ -38,6 +38,7 @@ plt.ylabel('freq')
 plt.title('Гистограмма частот')
 plt.savefig('hist2.png')
 tex.addimage('hist2.png')
+plt.clf()
 
 tex.printline('Моделирование событий')
 for d in data:
@@ -59,7 +60,22 @@ for d in data:
                 break
         break
 
+#3tex.printline(f'cos: {np.cos(modelrand(values, probs, 1))[0]}')
+#tex.printline(f'sin: {np.sin(modelrand(values, probs, 1))[0]}')
+vals = [np.sin(x1), np.sin(x2), np.cos(x3)]
+data2 = modelrand(vals, probs, 100)
+#print(data2)
+table = f'''sin/cos {round(np.sin(x1),3)} {round(np.sin(x2),3)} {round(np.sin(x3),3)}
+{round(np.cos(x1),4)}  {round(probs[0], 3)}  {round(probs[1], 3)}    {0.000}
+{round(np.cos(x3),3)}  {0.000}    {0.000}    {round(probs[2], 3)}'''
+tex.printline('Распрделение sinx cosx')
+tex.plaintext(table)
+plt.hist(data2)
+plt.xlabel('sample')
+plt.ylabel('freq')
+plt.title('Гистограмма частот')
+plt.savefig('hist3.png')
+tex.addimage('hist3.png')
+plt.clf()
 
-tex.printline(f'cos: {np.cos(modelrand(values, probs, 1))[0]}')
-tex.printline(f'sin: {np.sin(modelrand(values, probs, 1))[0]}')
 tex.printend()
